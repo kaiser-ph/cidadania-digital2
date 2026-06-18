@@ -10,57 +10,87 @@
 
     <header class="main-header">
         <div class="header-container">
-            <h1>Cidadania Digital <span>& IA</span></h1>
-            <button id="toggle-dark-mode" aria-label="Alternar modo escuro">🌓 Modo Escuro</button>
+            <h1>Cidadania Digital<span>& IA</span></h1>
+            <nav class="nav-menu">
+                <a href="#sobre">Sobre</a>
+                <a href="#identificar">Como Identificar</a>
+                <a href="#glossario">Glossário</a>
+                <a href="#quiz">Testar Conhecimento</a>
+                <a href="#denuncia">Reportar Mídia</a>
+            </nav>
+            <button id="toggle-dark-mode" aria-label="Alternar modo escuro">Twiter 🌓 Modo Escuro</button>
         </div>
     </header>
 
     <main>
         
-        <section class="hero-section">
+        <section id="sobre" class="hero-section">
             <h2>O Impacto das Deepfakes na Sociedade</h2>
-            <p>A inteligência artificial transformou a criação de conteúdos em 2026. Contudo, o surgimento de mídias manipuladas (deepfakes) exige novos hábitos de navegação e responsabilidade para combater a desinformação automatizada.</p>
+            <p>A inteligência artificial transformou drasticamente a criação de conteúdos em 2026. Contudo, o avanço das mídias manipuladas (deepfakes) e da desinformação automatizada desafia a nossa democracia, a segurança pública e a confiança nas instituições digitais. Desenvolver a cidadania digital é a nossa maior defesa.</p>
+            <div class="stats-container">
+                <div class="stat-item"><strong>90%</strong> <p>dos deepfakes em áudio enganam usuários comuns.</p></div>
+                <div class="stat-item"><strong>6x</strong> <p>Mais rápido é o compartilhamento de fake news.</p></div>
+            </div>
         </section>
 
-        <section class="info-section">
-            <h2>Como Identificar uma Mídia Manipulada?</h2>
+        <section id="identificar" class="info-section">
+            <h2>Como Identificar uma Mídia Manipulada por IA?</h2>
+            <p class="section-subtitle">A tecnologia evoluiu, mas os geradores de IA ainda deixam rastros imperfeitos. Fique atento a estes três pilares:</p>
+            
             <div class="cards-container">
                 <div class="card">
-                    <h3>👁️ Pistas Visuais</h3>
-                    <p>Fique atento a piscadas de olhos não naturais, sombras inconsistentes no rosto e falhas digitais nas bordas do cabelo ou orelhas.</p>
+                    <div class="card-icon">👁️</div>
+                    <h3>Pistas Visuais e Faciais</h3>
+                    <p>Fique atento a piscadas de olhos ausentes ou não naturais, sombras inconsistentes no rosto, dentes desalinhados em excesso e falhas digitais próximas às bordas do cabelo e das orelhas.</p>
                 </div>
                 <div class="card">
-                    <h3>🔊 Inconsistência de Áudio</h3>
-                    <p>Ruídos metálicos estranhos no fundo ou falta de sincronia exata entre o movimento dos lábios e as palavras faladas.</p>
+                    <div class="card-icon">🔊</div>
+                    <h3>Inconsistência Acústica</h3>
+                    <p>Mídias sintéticas costumam apresentar ruídos metálicos artificiais isolados no fundo, falta de respiração natural do interlocutor e pequenos atrasos entre o movimento labial e o som emitido.</p>
                 </div>
                 <div class="card">
-                    <h3>🔍 Verificação de Fontes</h3>
-                    <p>Sempre busque a mesma notícia em portais jornalísticos consolidados e agências de checagem antes de compartilhar.</p>
+                    <div class="card-icon">🔍</div>
+                    <h3>Contexto e Rastreabilidade</h3>
+                    <p>Vídeos bombásticos raramente saem em apenas uma rede social. Sempre busque a mesma informação em portais jornalísticos consolidados e em agências de checagem oficiais antes de reagir.</p>
                 </div>
             </div>
         </section>
 
-        <section class="quiz-section">
+        <section id="glossario" class="glossary-section">
+            <h2>Dicionário da Era da IA</h2>
+            <dl class="glossary-list">
+                <dt>Deepfake</dt>
+                <dd>Técnica que utiliza inteligência artificial (redes neurais profundas) para sobrepor rostos ou clonar vozes de pessoas, criando vídeos e áudios falsos ultra-realistas.</dd>
+                
+                <dt>Desinformação Automatizada</dt>
+                <dd>Uso coordenado de algoritmos, bots e IA generativa para criar e espalhar boatos em larga escala de maneira extremamente rápida e personalizada.</dd>
+                
+                <dt>Cidadania Digital</dt>
+                <dd>Conjunto de diretrizes, direitos e deveres que norteiam o uso ético, seguro, crítico e responsável das tecnologias da informação na sociedade.</dd>
+            </dl>
+        </section>
+
+        <section id="quiz" class="quiz-section">
             <h2>Quiz Anti-Desinformação</h2>
-            <p>Teste suas habilidades de cidadão digital respondendo à questão abaixo:</p>
+            <p>Monitore sua capacidade crítica respondendo à questão situacional abaixo:</p>
             
             <form id="quiz-form">
                 <fieldset>
-                    <legend>Se você receber um vídeo bombástico de uma figura pública dizendo algo absurdo, qual deve ser sua primeira ação?</legend>
+                    <legend>Se você receber um vídeo bombástico de uma figura política relevante dizendo algo absurdo ou ilegal nas redes, qual deve ser sua primeira ação imediata?</legend>
                     
                     <label class="radio-label">
                         <input type="radio" name="quiz-answer" value="errada1"> 
-                        <span>Compartilhar imediatamente nos grupos de mensagens para alertar a todos.</span>
+                        <span>Compartilhar imediatamente nos grupos de mensagens da família para alertar o maior número de pessoas o quanto antes.</span>
                     </label>
                     
                     <label class="radio-label">
                         <input type="radio" name="quiz-answer" value="correta"> 
-                        <span>Pausar, desconfiar e pesquisar o fato em agências de checagem confiáveis.</span>
+                        <span>Pausar a emoção, desconfiar do teor alarmista e pesquisar o fato de forma ativa em agências de checagem consolidadas.</span>
                     </label>
                     
                     <label class="radio-label">
                         <input type="radio" name="quiz-answer" value="errada2"> 
-                        <span>Comentar no vídeo atacando a pessoa, validando o engajamento da publicação.</span>
+                        <span>Deixar um comentário inflamado criticando a pessoa no vídeo, aumentando o engajamento e a distribuição orgânica do post.</span>
                     </label>
                 </fieldset>
                 
@@ -70,12 +100,16 @@
             <div id="quiz-feedback" class="feedback-box hidden"></div>
         </section>
 
-    </main>
-
-    <footer class="main-footer">
-        <p>&copy; 2026 Projeto Cidadania Digital - Ensino Médio. Conteúdo 100% Autoral.</p>
-    </footer>
-
-    <script src="js/script.js"></script>
-</body>
-</html>
+        <section id="denuncia" class="form-section">
+            <h2>Central de Alerta Comunitário</h2>
+            <p>Encontrou um vídeo ou áudio suspeito circulando nas redes da sua comunidade? Envie o link para nossa simulação de análise de integridade digital.</p>
+            
+            <form id="reporting-form">
+                <div class="form-group">
+                    <label for="user-name">Seu Nome (Opcional):</label>
+                    <input type="text" id="user-name" placeholder="Ex: João Silva">
+                </div>
+                
+                <div class="form-group">
+                    <label for="media-url">URL da Mídia Suspeita (Obrigatório):</label>
+                    <input type="url"
