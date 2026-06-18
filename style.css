@@ -1,0 +1,224 @@
+/* ==========================================================================
+   1. VARIÁVEIS DE CORES E IDENTIDADE VISUAL
+   ========================================================================== */
+:root {
+    --bg-primary: #f4f7f6;
+    --bg-card: #ffffff;
+    --text-main: #2c3e50;
+    --accent-color: #2980b9;
+    --success-color: #27ae60;
+    --error-color: #c0392b;
+    --header-bg: #1a252f;
+    --header-text: #ffffff;
+}
+
+/* Ativado dinamicamente pelo JavaScript */
+body.dark-theme {
+    --bg-primary: #121212;
+    --bg-card: #1e1e1e;
+    --text-main: #e0e0e0;
+    --accent-color: #3498db;
+    --header-bg: #000000;
+}
+
+/* ==========================================================================
+   2. ESTILOS GLOBAIS E RESETS
+   ========================================================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--bg-primary);
+    color: var(--text-main);
+    line-height: 1.6;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+main {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+section {
+    background-color: var(--bg-card);
+    padding: 2rem;
+    margin-bottom: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+h2 {
+    color: var(--accent-color);
+    margin-bottom: 1rem;
+}
+
+/* ==========================================================================
+   3. CABEÇALHO (FLEXBOX)
+   ========================================================================== */
+.main-header {
+    background-color: var(--header-bg);
+    color: var(--header-text);
+    padding: 1rem 2rem;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.header-container h1 span {
+    color: var(--accent-color);
+}
+
+#toggle-dark-mode {
+    background-color: var(--accent-color);
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: transform 0.2s ease;
+}
+
+#toggle-dark-mode:hover {
+    transform: scale(1.05);
+}
+
+/* ==========================================================================
+   4. LAYOUT DE CARDS (FLEXBOX AVANÇADO)
+   ========================================================================== */
+.cards-container {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: space-between;
+    margin-top: 1.5rem;
+}
+
+.card {
+    background-color: var(--bg-primary);
+    padding: 1.5rem;
+    border-radius: 6px;
+    flex: 1;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Efeito Hover interativo (Exigência do Nível 4 de Usabilidade) */
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* ==========================================================================
+   5. FORMULÁRIOS E CAMPOS DE INTERAÇÃO
+   ========================================================================== */
+fieldset {
+    border: none;
+    margin: 1.5rem 0;
+}
+
+legend {
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+.radio-label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background-color: var(--bg-primary);
+    padding: 1rem;
+    margin-bottom: 0.5rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.radio-label:hover {
+    background-color: rgba(41, 128, 185, 0.1);
+}
+
+#submit-btn {
+    background-color: var(--accent-color);
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 4px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    width: 100%;
+    transition: background-color 0.2s;
+}
+
+#submit-btn:hover {
+    background-color: var(--header-bg);
+}
+
+/* Classes utilitárias injetadas via JavaScript */
+.feedback-box {
+    margin-top: 1.5rem;
+    padding: 1rem;
+    border-radius: 4px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.feedback-box.correct {
+    background-color: rgba(39, 174, 96, 0.2);
+    color: var(--success-color);
+    border: 1px solid var(--success-color);
+}
+
+.feedback-box.wrong {
+    background-color: rgba(192, 57, 43, 0.2);
+    color: var(--error-color);
+    border: 1px solid var(--error-color);
+}
+
+.hidden {
+    display: none;
+}
+
+/* ==========================================================================
+   6. RODAPÉ E REGRAS DE RESPONSIVIDADE (MEDIA QUERIES)
+   ========================================================================== */
+.main-footer {
+    text-align: center;
+    padding: 1.5rem;
+    background-color: var(--header-bg);
+    color: var(--header-text);
+    margin-top: 4rem;
+}
+
+/* Responsividade Máxima para Dispositivos Móveis */
+@media (max-width: 768px) {
+    .header-container {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+    }
+
+    .cards-container {
+        flex-direction: column; /* Transforma os cards horizontais em verticais no celular */
+    }
+    
+    main {
+        margin: 1rem auto;
+    }
+
+    section {
+        padding: 1.5rem;
+    }
+}
