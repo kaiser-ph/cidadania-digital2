@@ -1,1 +1,256 @@
+/* ==========================================================================
+   PREFIXO E VARIÁVEIS DE ESTILO (DESIGN SYSTEM)
+   ========================================================================== */
+:root {
+    --primary: #2563eb;
+    --primary-hover: #1d4ed8;
+    --primary-light: #eff6ff;
+    --bg: #f8fafc;
+    --card: #ffffff;
+    --dark: #0f172a;
+    --text-muted: #64748b;
+    --error: #ef4444;
+    --error-bg: #fee2e2;
+    --success: #10b981;
+    --success-bg: #dcfce7;
+    --border: #e2e8f0;
+    --radius-lg: 16px;
+    --radius-md: 8px;
+    --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    --shadow: 0 4px 6px -1px rgba(15, 23, 42, 0.05), 0 2px 4px -2px rgba(15, 23, 42, 0.05);
+    --shadow-hover: 0 20px 25px -5px rgba(15, 23, 42, 0.1), 0 8px 10px -6px rgba(15, 23, 42, 0.1);
+}
+
+/* ==========================================================================
+   RESETS E CONFIGURAÇÕES GERAIS
+   ========================================================================== */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    background-color: var(--bg);
+    color: var(--dark);
+    line-height: 1.6;
+    padding: 16px;
+}
+
+/* ==========================================================================
+   ESTRUTURA DE LAYOUT (RESPONSIVIDADE)
+   ========================================================================== */
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr; /* Mobile First: Uma coluna por padrão */
+    gap: 24px;
+    padding: 8px 0;
+}
+
+/* Ativa visualização lado a lado em telas maiores (Tablets e PCs) */
+@media (min-width: 768px) {
+    .container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .full-width {
+        grid-column: span 2;
+    }
+}
+
+/* ==========================================================================
+   COMPONENTES: CARDS (BLOCOS DE CONTEÚDO)
+   ========================================================================== */
+.card {
+    background: var(--card);
+    border-radius: var(--radius-lg);
+    padding: 28px;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border);
+    transition: var(--transition);
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-hover);
+}
+
+.card h2 {
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: var(--dark);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    letter-spacing: -0.02em;
+}
+
+/* ==========================================================================
+   COMPONENTES: FORMULÁRIOS E INPUTS
+   ========================================================================== */
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 12px;
+}
+
+label {
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--dark);
+}
+
+input, select, textarea {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    font-size: 0.95rem;
+    background-color: var(--bg);
+    color: var(--dark);
+    transition: var(--transition);
+}
+
+input:focus, select:focus, textarea:focus {
+    outline: none;
+    border-color: var(--primary);
+    background-color: var(--card);
+    box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.12);
+}
+
+/* ==========================================================================
+   COMPONENTES: BOTÕES
+   ========================================================================== */
+button {
+    width: 100%;
+    padding: 14px;
+    border: none;
+    border-radius: var(--radius-md);
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Botão Primário (Ações de Sucesso/Envio) */
+button[type="submit"], .btn-primary {
+    background: var(--primary);
+    color: white;
+}
+
+button[type="submit"]:hover, .btn-primary:hover {
+    background: var(--primary-hover);
+}
+
+/* Botão Secundário (Exportações/PDF) */
+.btn-pdf {
+    background: var(--primary-light);
+    color: var(--primary);
+}
+
+.btn-pdf:hover {
+    background: #dbeafe;
+}
+
+button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* ==========================================================================
+   MÓDULO: QUIZ E DINÂMICAS DE TEMPO
+   ========================================================================== */
+/* Cronômetro Regressivo */
+.timer-container {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    background: var(--error-bg);
+    padding: 14px 18px;
+    border-radius: var(--radius-md);
+    border: 1px solid #fee2e2;
+    color: var(--error);
+    font-weight: 700;
+    font-size: 0.95rem;
+}
+
+.timer-wrapper-bar {
+    width: 100%;
+    background: rgba(239, 68, 68, 0.15);
+    height: 6px;
+    border-radius: 100px;
+    overflow: hidden;
+}
+
+.timer-bar {
+    height: 100%;
+    background: var(--error);
+    width: 100%;
+    border-radius: 100px;
+    transition: width 1s linear;
+}
+
+/* Opções de Resposta (Quiz) */
+.options {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 8px;
+}
+
+.options button {
+    background: var(--bg);
+    color: var(--dark);
+    text-align: left;
+    justify-content: flex-start;
+    padding: 16px;
+    border: 1px solid var(--border);
+    font-weight: 500;
+}
+
+.options button:hover:not(:disabled) {
+    background: #f1f5f9;
+    border-color: #cbd5e1;
+    transform: translateX(4px);
+}
+
+/* Estados de Feedback Visual do Quiz */
+.correct {
+    background: var(--success-bg) !important;
+    border-color: var(--success) !important;
+    color: #166534 !important;
+    font-weight: 700 !important;
+}
+
+.incorrect {
+    background: var(--error-bg) !important;
+    border-color: var(--error) !important;
+    color: #991b1b !important;
+}
+
+/* ==========================================================================
+   ANIMAÇÕES DE ENTRADA (FEEDBACK VISUAL)
+   ========================================================================== */
+@keyframes aparecer {
+    from { opacity: 0; transform: scale(0.97); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+#resultado-box {
+    animation: aparecer 0.4s ease forwards;
+    padding: 20px;
+    background: var(--primary-light);
+    border-radius: var(--radius-md);
+    color: var(--primary);
+}
 
