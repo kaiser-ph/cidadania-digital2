@@ -3,145 +3,322 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portal Cidadania Digital 2026: IA e Desinformação</title>
-    <link rel="stylesheet" href="css/style.css">
+    <title>Hub de Cidadania Digital 2026</title>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-hover: #1d4ed8;
+            --bg: #f8fafc;
+            --card-bg: #ffffff;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --success: #10b981;
+            --error: #ef4444;
+            --warning: #f59e0b;
+            --border: #e2e8f0;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background-color: var(--bg);
+            color: var(--text-main);
+            margin: 0;
+            padding: 0;
+            line-height: 1.5;
+        }
+
+        header {
+            background: linear-gradient(135deg, #1e3a8a, #2563eb);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+            font-weight: 800;
+            letter-spacing: -0.05em;
+        }
+
+        header p {
+            margin: 10px 0 0 0;
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .badge-ano {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            display: inline-block;
+            margin-top: 10px;
+        }
+
+        .container {
+            max-width: 1300px;
+            margin: 40px auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 30px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        .col-6 { grid-column: span 6; }
+        .col-8 { grid-column: span 8; }
+        .col-4 { grid-column: span 4; }
+        .col-12 { grid-column: span 12; }
+
+        @media (max-width: 992px) {
+            .col-6, .col-8, .col-4, .col-12 { grid-column: span 12; }
+        }
+
+        h2 {
+            margin-top: 0;
+            font-size: 1.4rem;
+            color: #0f172a;
+            border-bottom: 2px solid var(--bg);
+            padding-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* Formulários refinados */
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            box-sizing: border-box;
+            font-size: 0.95rem;
+            background-color: #f8fafc;
+            transition: all 0.2s;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            background-color: #fff;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+        }
+
+        /* Botões modernos */
+        button {
+            width: 100%;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            background: var(--primary);
+            color: white;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        button:hover { background: var(--primary-hover); }
+        .btn-danger { background: var(--error); }
+        .btn-danger:hover { background: #b91c1c; }
+
+        /* Módulo do Quiz Inteligente */
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .options button {
+            background: #f1f5f9;
+            color: var(--text-main);
+            text-align: left;
+            font-weight: normal;
+        }
+
+        .options button:hover:not(:disabled) {
+            background: #e2e8f0;
+        }
+
+        .options button.correct {
+            background: var(--success) !important;
+            color: white;
+            font-weight: bold;
+        }
+
+        .options button.incorrect {
+            background: var(--error) !important;
+            color: white;
+        }
+
+        /* Preview Imagem */
+        #preview-imagem {
+            max-width: 100%;
+            max-height: 140px;
+            margin-top: 12px;
+            display: none;
+            border-radius: 8px;
+            border: 2px dashed var(--border);
+            object-fit: contain;
+        }
+
+        /* Tabelas Dinâmicas de Dados */
+        .table-container {
+            overflow-x: auto;
+            margin-top: 15px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            font-size: 0.9rem;
+        }
+
+        th, td {
+            padding: 12px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        th {
+            background-color: #f1f5f9;
+            color: var(--text-main);
+            font-weight: 600;
+        }
+
+        /* Diretrizes */
+        .diretriz-item {
+            padding: 10px 0;
+            border-bottom: 1px dashed var(--border);
+        }
+        .diretriz-item:last-child { border: none; }
+        .diretriz-title { font-weight: bold; color: var(--primary); }
+
+        /* Notificações */
+        .toast {
+            background: var(--success);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            display: none;
+            z-index: 1000;
+            font-weight: bold;
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            color: var(--text-muted);
+            border-top: 1px solid var(--border);
+            margin-top: 60px;
+            font-size: 0.9rem;
+        }
+    </style>
 </head>
 <body>
 
-    <header class="main-header">
-        <div class="header-container">
-            <h1>Cidadania Digital<span>& IA</span></h1>
-            <nav class="nav-menu">
-                <a href="#sobre">Sobre</a>
-                <a href="#identificar">Como Identificar</a>
-                <a href="#glossario">Glossário</a>
-                <a href="#quiz">Testar Conhecimento</a>
-                <a href="#denuncia">Reportar Mídia</a>
-            </nav>
-            <button id="toggle-dark-mode" aria-label="Alternar modo escuro">Twiter 🌓 Modo Escuro</button>
+<header>
+    <h1>Plataforma Integrada de Cidadania Digital</h1>
+    <p>Conscientização, Ética e Práticas de Segurança em Redes Sociais</p>
+    <div class="badge-ano">Ciclo Letivo Nacional • 2026</div>
+</header>
+
+<div class="container">
+
+    <!-- FORMULÁRIO DE CADASTRO -->
+    <div class="card col-6">
+        <h2>👤 Registro de Usuário Consciente</h2>
+        <form id="cadastro-form">
+            <div class="form-group">
+                <label for="nome">Nome Completo</label>
+                <input type="text" id="nome" required placeholder="Ex: Maria Silva">
+            </div>
+            <div class="form-group">
+                <label for="email">E-mail de Contato</label>
+                <input type="email" id="email" required placeholder="exemplo@escola.com">
+            </div>
+            <div class="form-group">
+                <label for="perfil">Perfil na Rede</label>
+                <select id="perfil" required>
+                    <option value="">Selecione...</option>
+                    <option value="Estudante">Estudante</option>
+                    <option value="Educador">Educador / Professor</option>
+                    <option value="Responsável">Pai / Responsável</option>
+                </select>
+            </div>
+            <button type="submit">Salvar Registro Local</button>
+        </form>
+    </div>
+
+    <!-- CANAL DE DENÚNCIAS FICTÍCIAS -->
+    <div class="card col-6">
+        <h2>🛡️ Simulador de Denúncias Seguras</h2>
+        <form id="denuncia-form">
+            <div class="form-group">
+                <label for="tipo">Incidente Observado</label>
+                <select id="tipo" required>
+                    <option value="">Selecione a categoria...</option>
+                    <option value="Cyberbullying">Cyberbullying (Ofensas continuadas)</option>
+                    <option value="Fake News">Fake News (Desinformação prejudicial)</option>
+                    <option value="Phishing">Perfil Falso / Roubo de Dados</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="descricao">Relato Detalhado</label>
+                <textarea id="descricao" rows="2" required placeholder="Insira o texto descritivo do teste..."></textarea>
+            </div>
+            <div class="form-group">
+                <label>Captura de Tela / Evidência (Opcional)</label>
+                <input type="file" id="evidencia" accept="image/*" onchange="gerarPreview(event)">
+                <img id="preview-imagem" alt="Evidência selecionada">
+            </div>
+            <button type="submit" class="btn-danger">Registrar Ocorrência Pedagógica</button>
+        </form>
+    </div>
+
+    <!-- QUIZ INTERATIVO MANTIDO E OTIMIZADO -->
+    <div class="card col-8">
+        <h2>🧠 Desafio Prático de Conduta Online</h2>
+        <div id="quiz-box">
+            <p id="quiz-pergunta" style="font-weight: 600; font-size: 1.1rem;"></p>
+            <div class="options" id="quiz-opcoes"></div>
         </div>
-    </header>
+        <div id="quiz-resultado" style="display:none; text-align: center; padding: 20px;"></div>
+    </div>
 
-    <main>
-        
-        <section id="sobre" class="hero-section">
-            <h2>O Impacto das Deepfakes na Sociedade</h2>
-            <p>A inteligência artificial transformou drasticamente a criação de conteúdos em 2026. Contudo, o avanço das mídias manipuladas (deepfakes) e da desinformação automatizada desafia a nossa democracia, a segurança pública e a confiança nas instituições digitais. Desenvolver a cidadania digital é a nossa maior defesa.</p>
-            <div class="stats-container">
-                <div class="stat-item"><strong>90%</strong> <p>dos deepfakes em áudio enganam usuários comuns.</p></div>
-                <div class="stat-item"><strong>6x</strong> <p>Mais rápido é o compartilhamento de fake news.</p></div>
-            </div>
-        </section>
-
-        <section id="identificar" class="info-section">
-            <h2>Como Identificar uma Mídia Manipulada por IA?</h2>
-            <p class="section-subtitle">A tecnologia evoluiu, mas os geradores de IA ainda deixam rastros imperfeitos. Fique atento a estes três pilares:</p>
-            
-            <div class="cards-container">
-                <div class="card">
-                    <div class="card-icon">👁️</div>
-                    <h3>Pistas Visuais e Faciais</h3>
-                    <p>Fique atento a piscadas de olhos ausentes ou não naturais, sombras inconsistentes no rosto, dentes desalinhados em excesso e falhas digitais próximas às bordas do cabelo e das orelhas.</p>
-                </div>
-                <div class="card">
-                    <div class="card-icon">🔊</div>
-                    <h3>Inconsistência Acústica</h3>
-                    <p>Mídias sintéticas costumam apresentar ruídos metálicos artificiais isolados no fundo, falta de respiração natural do interlocutor e pequenos atrasos entre o movimento labial e o som emitido.</p>
-                </div>
-                <div class="card">
-                    <div class="card-icon">🔍</div>
-                    <h3>Contexto e Rastreabilidade</h3>
-                    <p>Vídeos bombásticos raramente saem em apenas uma rede social. Sempre busque a mesma informação em portais jornalísticos consolidados e em agências de checagem oficiais antes de reagir.</p>
-                </div>
-            </div>
-        </section>
-
-        <section id="glossario" class="glossary-section">
-            <h2>Dicionário da Era da IA</h2>
-            <dl class="glossary-list">
-                <dt>Deepfake</dt>
-                <dd>Técnica que utiliza inteligência artificial (redes neurais profundas) para sobrepor rostos ou clonar vozes de pessoas, criando vídeos e áudios falsos ultra-realistas.</dd>
-                
-                <dt>Desinformação Automatizada</dt>
-                <dd>Uso coordenado de algoritmos, bots e IA generativa para criar e espalhar boatos em larga escala de maneira extremamente rápida e personalizada.</dd>
-                
-                <dt>Cidadania Digital</dt>
-                <dd>Conjunto de diretrizes, direitos e deveres que norteiam o uso ético, seguro, crítico e responsável das tecnologias da informação na sociedade.</dd>
-            </dl>
-        </section>
-
-        <section id="quiz" class="quiz-section">
-            <h2>Quiz Anti-Desinformação</h2>
-            <p>Monitore sua capacidade crítica respondendo à questão situacional abaixo:</p>
-            
-            <form id="quiz-form">
-                <fieldset>
-                    <legend>Se você receber um vídeo bombástico de uma figura política relevante dizendo algo absurdo ou ilegal nas redes, qual deve ser sua primeira ação imediata?</legend>
-                    
-                    <label class="radio-label">
-                        <input type="radio" name="quiz-answer" value="errada1"> 
-                        <span>Compartilhar imediatamente nos grupos de mensagens da família para alertar o maior número de pessoas o quanto antes.</span>
-                    </label>
-                    
-                    <label class="radio-label">
-                        <input type="radio" name="quiz-answer" value="correta"> 
-                        <span>Pausar a emoção, desconfiar do teor alarmista e pesquisar o fato de forma ativa em agências de checagem consolidadas.</span>
-                    </label>
-                    
-                    <label class="radio-label">
-                        <input type="radio" name="quiz-answer" value="errada2"> 
-                        <span>Deixar um comentário inflamado criticando a pessoa no vídeo, aumentando o engajamento e a distribuição orgânica do post.</span>
-                    </label>
-                </fieldset>
-                
-                <button type="submit" id="submit-btn">Verificar Resposta</button>
-            </form>
-            
-            <div id="quiz-feedback" class="feedback-box hidden"></div>
-        </section>
-
-        <section id="denuncia" class="form-section">
-            <h2>Central de Alerta Comunitário</h2>
-            <p>Encontrou um vídeo ou áudio suspeito circulando nas redes da sua comunidade? Envie o link para nossa simulação de análise de integridade digital.</p>
-            
-            <form id="reporting-form">
-                <div class="form-group">
-                    <label for="user-name">Seu Nome (Opcional):</label>
-                    <input type="text" id="user-name" placeholder="Ex: João Silva">
-                </div>
-                
-                <div class="form-group">
-                    <label for="media-url">URL da Mídia Suspeita (Obrigatório):</label>
-                    <input type="url" id="media-url" required placeholder="https://exemplo.com/video-suspeito">
-                </div>
-                
-                <div class="form-group">
-                    <label for="media-type">Onde essa mídia foi encontrada?</label>
-                    <select id="media-type">
-                        <option value="whatsapp">WhatsApp / Telegram</option>
-                        <option value="tiktok">TikTok / Reels</option>
-                        <option value="twitter">X (Antigo Twitter)</option>
-                        <option value="outros">Outros Veículos</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label for="user-notes">Descreva o que te fez suspeitar dessa mídia:</label>
-                    <textarea id="user-notes" rows="4" placeholder="Ex: A voz parece robótica e as bordas do rosto estão borradas..."></textarea>
-                </div>
-                
-                <button type="submit" id="report-btn">Enviar para Análise Comunitária</button>
-            </form>
-
-            <div id="report-feedback" class="feedback-box hidden"></div>
-        </section>
-
-    </main>
-
-    <footer class="main-footer">
-        <p>&copy; 2026 Portal Cidadania Digital - Ensino Médio Tecnológico. Conteúdo 100% Autoral e Vigilante.</p>
-    </footer>
-
-    <script src="js/script.js"></script>
-</body>
-</html>
+    <!-- PAINEL DE DIRETRIZES RÁPIDAS -->
+    <div class="card col-4">
+        <h2>📚 Pilares da Lei Geral de Proteção</h2>
+        <div class="diretriz-item">
