@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portal Cidadania Digital 2026: IA e Desinformação</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <header class="main-header">
+        <div class="header-container">
+            <h1>Cidadania Digital <span>& IA</span></h1>
+            <button id="toggle-dark-mode" aria-label="Alternar modo escuro">🌓 Modo Escuro</button>
+        </div>
+    </header>
+
+    <main>
+        
+        <section class="hero-section">
+            <h2>O Impacto das Deepfakes na Sociedade</h2>
+            <p>A inteligência artificial transformou a criação de conteúdos em 2026. Contudo, o surgimento de mídias manipuladas (deepfakes) exige novos hábitos de navegação e responsabilidade para combater a desinformação automatizada.</p>
+        </section>
+
+        <section class="info-section">
+            <h2>Como Identificar uma Mídia Manipulada?</h2>
+            <div class="cards-container">
+                <div class="card">
+                    <h3>👁️ Pistas Visuais</h3>
+                    <p>Fique atento a piscadas de olhos não naturais, sombras inconsistentes no rosto e falhas digitais nas bordas do cabelo ou orelhas.</p>
+                </div>
+                <div class="card">
+                    <h3>🔊 Inconsistência de Áudio</h3>
+                    <p>Ruídos metálicos estranhos no fundo ou falta de sincronia exata entre o movimento dos lábios e as palavras faladas.</p>
+                </div>
+                <div class="card">
+                    <h3>🔍 Verificação de Fontes</h3>
+                    <p>Sempre busque a mesma notícia em portais jornalísticos consolidados e agências de checagem antes de compartilhar.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="quiz-section">
+            <h2>Quiz Anti-Desinformação</h2>
+            <p>Teste suas habilidades de cidadão digital respondendo à questão abaixo:</p>
+            
+            <form id="quiz-form">
+                <fieldset>
+                    <legend>Se você receber um vídeo bombástico de uma figura pública dizendo algo absurdo, qual deve ser sua primeira ação?</legend>
+                    
+                    <label class="radio-label">
+                        <input type="radio" name="quiz-answer" value="errada1"> 
+                        <span>Compartilhar imediatamente nos grupos de mensagens para alertar a todos.</span>
+                    </label>
+                    
+                    <label class="radio-label">
+                        <input type="radio" name="quiz-answer" value="correta"> 
+                        <span>Pausar, desconfiar e pesquisar o fato em agências de checagem confiáveis.</span>
+                    </label>
+                    
+                    <label class="radio-label">
+                        <input type="radio" name="quiz-answer" value="errada2"> 
+                        <span>Comentar no vídeo atacando a pessoa, validando o engajamento da publicação.</span>
+                    </label>
+                </fieldset>
+                
+                <button type="submit" id="submit-btn">Verificar Resposta</button>
+            </form>
+            
+            <div id="quiz-feedback" class="feedback-box hidden"></div>
+        </section>
+
+    </main>
+
+    <footer class="main-footer">
+        <p>&copy; 2026 Projeto Cidadania Digital - Ensino Médio. Conteúdo 100% Autoral.</p>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
