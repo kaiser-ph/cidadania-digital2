@@ -1,115 +1,392 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portal Cidadania Digital 2026: IA e Desinformação</title>
-    <link rel="stylesheet" href="css/style.css">
-</head>
-<body>
+/* ==========================================================================
+   1. VARIÁVEIS DE CORES E ESCOPO DE IDENTIDADE VISUAL (NÍVEL 4)
+   ========================================================================== */
+:root {
+    --bg-primary: #f8fafc;
+    --bg-card: #ffffff;
+    --text-main: #0f172a;
+    --text-muted: #475569;
+    --accent-color: #0284c7;
+    --accent-hover: #0369a1;
+    --success-color: #16a34a;
+    --error-color: #dc2626;
+    --header-bg: #1e293b;
+    --header-text: #ffffff;
+    --border-color: #e2e8f0;
+}
 
-    <header class="main-header">
-        <div class="header-container">
-            <h1>Cidadania Digital<span>& IA</span></h1>
-            <nav class="nav-menu">
-                <a href="#sobre">Sobre</a>
-                <a href="#identificar">Como Identificar</a>
-                <a href="#glossario">Glossário</a>
-                <a href="#quiz">Testar Conhecimento</a>
-                <a href="#denuncia">Reportar Mídia</a>
-            </nav>
-            <button id="toggle-dark-mode" aria-label="Alternar modo escuro">Twiter 🌓 Modo Escuro</button>
-        </div>
-    </header>
+/* Alteração instantânea engatada pelo script.js */
+body.dark-theme {
+    --bg-primary: #0f172a;
+    --bg-card: #1e293b;
+    --text-main: #f8fafc;
+    --text-muted: #94a3b8;
+    --accent-color: #38bdf8;
+    --accent-hover: #7dd3fc;
+    --header-bg: #020617;
+    --border-color: #334155;
+}
 
-    <main>
-        
-        <section id="sobre" class="hero-section">
-            <h2>O Impacto das Deepfakes na Sociedade</h2>
-            <p>A inteligência artificial transformou drasticamente a criação de conteúdos em 2026. Contudo, o avanço das mídias manipuladas (deepfakes) e da desinformação automatizada desafia a nossa democracia, a segurança pública e a confiança nas instituições digitais. Desenvolver a cidadania digital é a nossa maior defesa.</p>
-            <div class="stats-container">
-                <div class="stat-item"><strong>90%</strong> <p>dos deepfakes em áudio enganam usuários comuns.</p></div>
-                <div class="stat-item"><strong>6x</strong> <p>Mais rápido é o compartilhamento de fake news.</p></div>
-            </div>
-        </section>
+/* ==========================================================================
+   2. REGRAS GLOBAIS DE RESET E TIPOGRAFIA
+   ========================================================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-        <section id="identificar" class="info-section">
-            <h2>Como Identificar uma Mídia Manipulada por IA?</h2>
-            <p class="section-subtitle">A tecnologia evoluiu, mas os geradores de IA ainda deixam rastros imperfeitos. Fique atento a estes três pilares:</p>
-            
-            <div class="cards-container">
-                <div class="card">
-                    <div class="card-icon">👁️</div>
-                    <h3>Pistas Visuais e Faciais</h3>
-                    <p>Fique atento a piscadas de olhos ausentes ou não naturais, sombras inconsistentes no rosto, dentes desalinhados em excesso e falhas digitais próximas às bordas do cabelo e das orelhas.</p>
-                </div>
-                <div class="card">
-                    <div class="card-icon">🔊</div>
-                    <h3>Inconsistência Acústica</h3>
-                    <p>Mídias sintéticas costumam apresentar ruídos metálicos artificiais isolados no fundo, falta de respiração natural do interlocutor e pequenos atrasos entre o movimento labial e o som emitido.</p>
-                </div>
-                <div class="card">
-                    <div class="card-icon">🔍</div>
-                    <h3>Contexto e Rastreabilidade</h3>
-                    <p>Vídeos bombásticos raramente saem em apenas uma rede social. Sempre busque a mesma informação em portais jornalísticos consolidados e em agências de checagem oficiais antes de reagir.</p>
-                </div>
-            </div>
-        </section>
+html {
+    scroll-behavior: smooth;
+}
 
-        <section id="glossario" class="glossary-section">
-            <h2>Dicionário da Era da IA</h2>
-            <dl class="glossary-list">
-                <dt>Deepfake</dt>
-                <dd>Técnica que utiliza inteligência artificial (redes neurais profundas) para sobrepor rostos ou clonar vozes de pessoas, criando vídeos e áudios falsos ultra-realistas.</dd>
-                
-                <dt>Desinformação Automatizada</dt>
-                <dd>Uso coordenado de algoritmos, bots e IA generativa para criar e espalhar boatos em larga escala de maneira extremamente rápida e personalizada.</dd>
-                
-                <dt>Cidadania Digital</dt>
-                <dd>Conjunto de diretrizes, direitos e deveres que norteiam o uso ético, seguro, crítico e responsável das tecnologias da informação na sociedade.</dd>
-            </dl>
-        </section>
+body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background-color: var(--bg-primary);
+    color: var(--text-main);
+    line-height: 1.6;
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
 
-        <section id="quiz" class="quiz-section">
-            <h2>Quiz Anti-Desinformação</h2>
-            <p>Monitore sua capacidade crítica respondendo à questão situacional abaixo:</p>
-            
-            <form id="quiz-form">
-                <fieldset>
-                    <legend>Se você receber um vídeo bombástico de uma figura política relevante dizendo algo absurdo ou ilegal nas redes, qual deve ser sua primeira ação imediata?</legend>
-                    
-                    <label class="radio-label">
-                        <input type="radio" name="quiz-answer" value="errada1"> 
-                        <span>Compartilhar imediatamente nos grupos de mensagens da família para alertar o maior número de pessoas o quanto antes.</span>
-                    </label>
-                    
-                    <label class="radio-label">
-                        <input type="radio" name="quiz-answer" value="correta"> 
-                        <span>Pausar a emoção, desconfiar do teor alarmista e pesquisar o fato de forma ativa em agências de checagem consolidadas.</span>
-                    </label>
-                    
-                    <label class="radio-label">
-                        <input type="radio" name="quiz-answer" value="errada2"> 
-                        <span>Deixar um comentário inflamado criticando a pessoa no vídeo, aumentando o engajamento e a distribuição orgânica do post.</span>
-                    </label>
-                </fieldset>
-                
-                <button type="submit" id="submit-btn">Verificar Resposta</button>
-            </form>
-            
-            <div id="quiz-feedback" class="feedback-box hidden"></div>
-        </section>
+main {
+    max-width: 1200px;
+    margin: 2.5rem auto;
+    padding: 0 1.5rem;
+}
 
-        <section id="denuncia" class="form-section">
-            <h2>Central de Alerta Comunitário</h2>
-            <p>Encontrou um vídeo ou áudio suspeito circulando nas redes da sua comunidade? Envie o link para nossa simulação de análise de integridade digital.</p>
-            
-            <form id="reporting-form">
-                <div class="form-group">
-                    <label for="user-name">Seu Nome (Opcional):</label>
-                    <input type="text" id="user-name" placeholder="Ex: João Silva">
-                </div>
-                
-                <div class="form-group">
-                    <label for="media-url">URL da Mídia Suspeita (Obrigatório):</label>
-                    <input type="url"
+section {
+    background-color: var(--bg-card);
+    padding: 3rem;
+    margin-bottom: 2.5rem;
+    border-radius: 12px;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+    border: 1px solid var(--border-color);
+}
+
+h2 {
+    color: var(--accent-color);
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    position: relative;
+}
+
+.section-subtitle {
+    color: var(--text-muted);
+    margin-bottom: 2rem;
+    font-size: 1.1rem;
+}
+
+/* ==========================================================================
+   3. DESIGN DO CABEÇALHO (STICKY MENU E FLEXBOX)
+   ========================================================================== */
+.main-header {
+    background-color: var(--header-bg);
+    color: var(--header-text);
+    padding: 1.25rem 2rem;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.header-container h1 {
+    font-size: 1.6rem;
+    font-weight: 800;
+}
+
+.header-container h1 span {
+    color: var(--accent-color);
+}
+
+.nav-menu {
+    display: flex;
+    gap: 1.5rem;
+}
+
+.nav-menu a {
+    color: var(--header-text);
+    text-decoration: none;
+    font-weight: 500;
+    opacity: 0.85;
+    transition: opacity 0.2s, color 0.2s;
+}
+
+.nav-menu a:hover {
+    opacity: 1;
+    color: var(--accent-color);
+}
+
+#toggle-dark-mode {
+    background-color: var(--accent-color);
+    color: white;
+    border: none;
+    padding: 0.6rem 1.2rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: transform 0.2s, background-color 0.2s;
+}
+
+#toggle-dark-mode:hover {
+    transform: scale(1.05);
+    background-color: var(--accent-hover);
+}
+
+/* ==========================================================================
+   4. SEÇÃO HERO E BLOCOS DE ESTATÍSTICAS
+   ========================================================================== */
+.hero-section {
+    background: linear-gradient(135deg, #0f172a, #1e293b);
+    color: #ffffff;
+    text-align: center;
+}
+body.dark-theme .hero-section {
+    background: linear-gradient(135deg, #020617, #0f172a);
+}
+
+.hero-section h2 {
+    color: #ffffff;
+}
+
+.hero-section p {
+    max-width: 800px;
+    margin: 0 auto 2.5rem auto;
+    opacity: 0.9;
+    font-size: 1.15rem;
+}
+
+.stats-container {
+    display: flex;
+    justify-content: center;
+    gap: 4rem;
+}
+
+.stat-item strong {
+    font-size: 3rem;
+    color: var(--accent-color);
+    display: block;
+}
+
+.stat-item p {
+    font-size: 0.95rem;
+    color: #cbd5e1;
+}
+
+/* ==========================================================================
+   5. LAYOUT DE CARDS AVANÇADO (FLEXBOX DINÂMICO)
+   ========================================================================== */
+.cards-container {
+    display: flex;
+    gap: 2rem;
+    justify-content: space-between;
+}
+
+.card {
+    background-color: var(--bg-primary);
+    padding: 2rem;
+    border-radius: 10px;
+    flex: 1;
+    border: 1px solid var(--border-color);
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s;
+}
+
+.card-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.card h3 {
+    margin-bottom: 1rem;
+    font-size: 1.3rem;
+    color: var(--accent-color);
+}
+
+.card p {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+}
+
+/* Efeitos visuais interativos refinados exigidos na Usabilidade */
+.card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+}
+
+/* ==========================================================================
+   6. GLOSSÁRIO TÉCNICO (TAGS SEMÂNTICAS DL/DT/DD)
+   ========================================================================== */
+.glossary-list dt {
+    font-weight: 700;
+    color: var(--accent-color);
+    font-size: 1.2rem;
+    margin-top: 1.5rem;
+}
+
+.glossary-list dd {
+    margin-left: 0;
+    color: var(--text-muted);
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+/* ==========================================================================
+   7. FORMULÁRIOS INTERATIVOS E ÁREAS DE SELEÇÃO (QUIZ E REPORT)
+   ========================================================================== */
+fieldset {
+    border: none;
+    margin: 2rem 0;
+}
+
+legend {
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    font-size: 1.15rem;
+}
+
+.radio-label {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background-color: var(--bg-primary);
+    padding: 1.25rem;
+    margin-bottom: 0.75rem;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: border-color 0.2s, background-color 0.2s;
+}
+
+.radio-label:hover {
+    border-color: var(--accent-color);
+    background-color: rgba(2, 132, 199, 0.05);
+}
+
+.radio-label input[type="radio"] {
+    width: 18px;
+    height: 18px;
+    accent-color: var(--accent-color);
+}
+
+/* Elementos do Formulário de Coleta de Dados */
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+.form-group input, 
+.form-group select, 
+.form-group textarea {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--border-color);
+    background-color: var(--bg-primary);
+    color: var(--text-main);
+    border-radius: 6px;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.form-group input:focus, 
+.form-group select:focus, 
+.form-group textarea:focus {
+    border-color: var(--accent-color);
+}
+
+button[type="submit"] {
+    background-color: var(--accent-color);
+    color: white;
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    width: 100%;
+    transition: background-color 0.2s;
+}
+
+button[type="submit"]:hover {
+    background-color: var(--accent-hover);
+}
+
+/* ==========================================================================
+   8. CAIXAS DE FEEDBACK CONTROLADAS PELO JAVASCRIPT
+   ========================================================================== */
+.feedback-box {
+    margin-top: 1.5rem;
+    padding: 1.25rem;
+    border-radius: 8px;
+    font-weight: 600;
+    text-align: center;
+}
+
+.feedback-box.correct {
+    background-color: rgba(22, 163, 74, 0.15);
+    color: var(--success-color);
+    border: 1px solid var(--success-color);
+}
+
+.feedback-box.wrong {
+    background-color: rgba(220, 38, 38, 0.15);
+    color: var(--error-color);
+    border: 1px solid var(--error-color);
+}
+
+.hidden {
+    display: none;
+}
+
+/* ==========================================================================
+   9. RODAPÉ E REGRAS DE RESPONSIVIDADE (MEDIA QUERIES)
+   ========================================================================== */
+.main-footer {
+    text-align: center;
+    padding: 2rem;
+    background-color: var(--header-bg);
+    color: var(--header-text);
+    margin-top: 5rem;
+    font-size: 0.95rem;
+}
+
+/* Otimização de quebra de layout para celulares e tablets */
+@media (max-width: 768px) {
+    .header-container {
+        flex-direction: column;
+        gap: 1.25rem;
+    }
+
+    .nav-menu {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1rem;
+    }
+
+    .cards-container {
+        flex-direction: column; /* Transforma as colunas em blocos empilhados verticais */
+        gap: 1.5rem;
+    }
+
+    .stats-container {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
+    section {
+        padding: 1.75rem;
+    }
+}
