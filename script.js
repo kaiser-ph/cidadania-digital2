@@ -1,67 +1,53 @@
-// server.js
-const express = require('express');
-const cors = require('cors');
-const app = express();
-const PORT = 3000;
+package com.cidadania.api.controller;
 
-// Middlewares obrigatórios para APIs modernas
-app.use(cors()); // Permite requisições vindas do arquivo HTML frontal
-app.use(express.json({ limit: '10mb' })); // Suporta JSON e uploads Base64
+import com.cidadania.api.model.Usuario;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
-// Banco de Dados fictício na memória RAM do Servidor
-let bancoUsuarios = [];
-let bancoDenuncias = [];
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
-// Função de Sanitização no Servidor (Proteção Backend contra Injeção de Código)
-function limparInput(texto) {
-    if (typeof texto !== 'string') return '';
-    return texto.replace(/[&<>'"]/g, tag => ({
-        '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;'
-    }[tag] || tag));
-}
+@RestController
+@RequestMapping("/api/usuarios")
+// Permite que o arquivo HTML (mesmo aberto localmente) envie dados com segurança
+@CrossOrigin(origins = "*", allowedHeaders = "*")
+public class UsuarioController {
 
-// ROTA 1: Cadastrar Usuário Consciente
-app.post('/api/usuarios', (req, res) => {
-    const { nome, email, perfil } = req.body;
-    
-    if (!nome || !email || !perfil) {
-        return res.status(400).json({ erro: "Campos obrigatórios ausentes." });
+    // Banco de dados em memória volátil estruturado
+    private final List<Usuario> bancoDeDadosLocal = new ArrayList<>();
+
+    /**
+     * Endpoint POST - Recebe e valida o cadastro do front-end
+     */
+    @PostMapping
+    public ResponseEntity<?> cadastrarUsuarioConsciente(@RequestBody Usuario usuario) {
+        // Validação defensiva em Java
+        if (usuario.getNome() == null || usuario.getNome().trim().isEmpty() ||
+            usuario.getEmail() == null || usuario.getEmail().trim().isEmpty()) {
+            return ResponseEntity.badRequest().body("Erro: Dados obrigatorios violados.");
+        }
+
+        // Processamento e higienização do Objeto Java
+        usuario.setId(UUID.randomUUID().toString()); // Gera ID Hexadecimal único
+        usuario.setDataRegistro(LocalDateTime.now());
+        
+        // Sanitização simples contra injeção de scripts maliciosos (XSS) no Servidor
+        usuario.setNome(usuario.getNome().replaceAll("<[^>]*>", ""));
+        usuario.setEmail(usuario.getEmail().replaceAll("<[^>]*>", ""));
+
+        bancoDeDadosLocal.add(usuario);
+
+        return new ResponseEntity<>(usuario, HttpStatus.CREATED);
     }
 
-    const novoUsuario = {
-        id: 'usr_' + Date.now(),
-        nome: limparInput(nome),
-        email: limparInput(email),
-        perfil: perfil,
-        criadoEm: new Date().toLocaleString('pt-BR')
-    };
-
-    bancoUsuarios.push(novoUsuario);
-    res.status(201).json({ msg: "Usuário gravado no servidor!", usuario: novoUsuario });
-});
-
-// ROTA 2: Listar Usuários Cadastrados
-app.get('/api/usuarios', (req, res) => {
-    res.json(bancoUsuarios);
-});
-
-// ROTA 3: Registrar Denúncia Fictícia Pedagógica
-app.post('/api/denuncias', (req, res) => {
-    const { tipo, descricao, imagem } = req.body;
-
-    const novaDenuncia = {
-        ticket: 'TK-' + Math.floor(1000 + Math.random() * 9000),
-        tipo: tipo,
-        descricao: limparInput(descricao),
-        imagem: imagem || "Nenhuma",
-        data: new Date().toLocaleString('pt-BR')
-    };
-
-    bancoDenuncias.push(novaDenuncia);
-    res.status(201).json({ msg: "Denúncia processada pelo servidor!", denuncia: novaDenuncia });
-});
-
-// Inicialização do Servidor de Redes
-app.listen(PORT, () => {
-    console.log(`🚀 Servidor de Cidadania Digital rodando em http://localhost:${PORT}`);
-});
+    /**
+     * Endpoint GET - Retorna a lista de auditoria completa
+     */
+    @getMapping
+    public ResponseEntity<List<Usuario>> listarTodosParaAuditoria() {
+        return ResponseEntity.ok(bancoDeDadosLocal);
+    }
+}
