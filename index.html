@@ -3,19 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hub de Cidadania Digital 2026</title>
+    <title>Portal Global de Cidadania Digital 2026</title>
+    <!-- Inclusão do jsPDF para geração de relatórios locais de auditoria -->
+    <script src="https://cloudflare.com"></script>
     <style>
         :root {
-            --primary: #2563eb;
-            --primary-hover: #1d4ed8;
-            --bg: #f8fafc;
+            --primary: #1e40af;
+            --primary-hover: #1e3a8a;
+            --bg: #f1f5f9;
             --card-bg: #ffffff;
-            --text-main: #1e293b;
-            --text-muted: #64748b;
+            --text-main: #0f172a;
+            --text-muted: #475569;
             --success: #10b981;
             --error: #ef4444;
             --warning: #f59e0b;
-            --border: #e2e8f0;
+            --border: #cbd5e1;
         }
 
         body {
@@ -24,44 +26,34 @@
             color: var(--text-main);
             margin: 0;
             padding: 0;
-            line-height: 1.5;
+            line-height: 1.6;
         }
 
         header {
-            background: linear-gradient(135deg, #1e3a8a, #2563eb);
+            background: linear-gradient(135deg, #0f172a, #1e40af);
             color: white;
-            padding: 40px 20px;
+            padding: 50px 20px;
             text-align: center;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
         }
 
         header h1 {
             margin: 0;
-            font-size: 2.5rem;
+            font-size: 2.8rem;
             font-weight: 800;
             letter-spacing: -0.05em;
         }
 
         header p {
-            margin: 10px 0 0 0;
-            font-size: 1.1rem;
+            margin: 12px 0 0 0;
+            font-size: 1.2rem;
             opacity: 0.9;
         }
 
-        .badge-ano {
-            background: rgba(255, 255, 255, 0.2);
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: bold;
-            display: inline-block;
-            margin-top: 10px;
-        }
-
         .container {
-            max-width: 1300px;
+            max-width: 1400px;
             margin: 40px auto;
-            padding: 0 20px;
+            padding: 0 25px;
             display: grid;
             grid-template-columns: repeat(12, 1fr);
             gap: 30px;
@@ -71,14 +63,14 @@
             background: var(--card-bg);
             border: 1px solid var(--border);
             border-radius: 16px;
-            padding: 24px;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
-            transition: transform 0.2s, box-shadow 0.2s;
+            padding: 30px;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
         }
 
         .card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            transform: translateY(-4px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
         }
 
         .col-6 { grid-column: span 6; }
@@ -86,239 +78,162 @@
         .col-4 { grid-column: span 4; }
         .col-12 { grid-column: span 12; }
 
-        @media (max-width: 992px) {
+        @media (max-width: 1024px) {
             .col-6, .col-8, .col-4, .col-12 { grid-column: span 12; }
         }
 
         h2 {
             margin-top: 0;
-            font-size: 1.4rem;
-            color: #0f172a;
+            font-size: 1.5rem;
             border-bottom: 2px solid var(--bg);
-            padding-bottom: 12px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
+            padding-bottom: 14px;
+            color: #1e293b;
         }
 
-        /* Formulários refinados */
-        .form-group {
-            margin-bottom: 18px;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 6px;
-            font-weight: 600;
-            font-size: 0.9rem;
-        }
-
+        .form-group { margin-bottom: 20px; }
+        label { display: block; margin-bottom: 8px; font-weight: 600; font-size: 0.95rem; }
         input, select, textarea {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            box-sizing: border-box;
-            font-size: 0.95rem;
-            background-color: #f8fafc;
-            transition: all 0.2s;
+            width: 100%; padding: 14px; border: 1px solid var(--border);
+            border-radius: 8px; box-sizing: border-box; font-size: 1rem;
+            background-color: #f8fafc; transition: all 0.2s ease;
         }
-
         input:focus, select:focus, textarea:focus {
-            outline: none;
-            border-color: var(--primary);
-            background-color: #fff;
-            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+            outline: none; border-color: var(--primary); background-color: #fff;
+            box-shadow: 0 0 0 4px rgba(30, 64, 175, 0.15);
         }
 
-        /* Botões modernos */
         button {
-            width: 100%;
-            padding: 12px 20px;
-            border: none;
-            border-radius: 8px;
-            background: var(--primary);
-            color: white;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: background 0.2s;
+            width: 100%; padding: 14px 24px; border: none; border-radius: 8px;
+            background: var(--primary); color: white; font-size: 1rem; font-weight: 700;
+            cursor: pointer; transition: background 0.2s ease;
         }
-
         button:hover { background: var(--primary-hover); }
         .btn-danger { background: var(--error); }
-        .btn-danger:hover { background: #b91c1c; }
+        .btn-danger:hover { background: #dc2626; }
+        .btn-pdf { background: #475569; margin-top: 15px; }
+        .btn-pdf:hover { background: #334155; }
 
-        /* Módulo do Quiz Inteligente */
-        .options {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            margin-top: 15px;
+        .timer-container {
+            display: flex; justify-content: space-between; align-items: center;
+            background: #fee2e2; padding: 12px 20px; border-radius: 8px;
+            border: 1px solid #fca5a5; margin-bottom: 20px; font-weight: bold; color: var(--error);
         }
+        .timer-bar-wrapper { width: 65%; background: rgba(239, 68, 68, 0.2); border-radius: 4px; height: 8px; overflow: hidden; }
+        .timer-bar { height: 100%; background: var(--error); width: 100%; transition: width 1s linear; }
 
-        .options button {
-            background: #f1f5f9;
-            color: var(--text-main);
-            text-align: left;
-            font-weight: normal;
-        }
+        .options { display: flex; flex-direction: column; gap: 12px; margin-top: 15px; }
+        .options button { background: #f1f5f9; color: var(--text-main); text-align: left; font-weight: 500; }
+        .options button:hover:not(:disabled) { background: #e2e8f0; transform: translateX(3px); }
+        .options button.correct { background: var(--success) !important; color: white; }
+        .options button.incorrect { background: var(--error) !important; color: white; }
 
-        .options button:hover:not(:disabled) {
-            background: #e2e8f0;
-        }
+        #preview-imagem { max-width: 100%; max-height: 150px; margin-top: 15px; display: none; border-radius: 8px; border: 2px dashed var(--border); }
+        .table-container { overflow-x: auto; margin-top: 15px; }
+        table { width: 100%; border-collapse: collapse; font-size: 0.95rem; }
+        th, td { padding: 14px; border-bottom: 1px solid var(--border); text-align: left; }
+        th { background-color: #f8fafc; font-weight: 700; }
 
-        .options button.correct {
-            background: var(--success) !important;
-            color: white;
-            font-weight: bold;
-        }
-
-        .options button.incorrect {
-            background: var(--error) !important;
-            color: white;
-        }
-
-        /* Preview Imagem */
-        #preview-imagem {
-            max-width: 100%;
-            max-height: 140px;
-            margin-top: 12px;
-            display: none;
-            border-radius: 8px;
-            border: 2px dashed var(--border);
-            object-fit: contain;
-        }
-
-        /* Tabelas Dinâmicas de Dados */
-        .table-container {
-            overflow-x: auto;
-            margin-top: 15px;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            text-align: left;
-            font-size: 0.9rem;
-        }
-
-        th, td {
-            padding: 12px;
-            border-bottom: 1px solid var(--border);
-        }
-
-        th {
-            background-color: #f1f5f9;
-            color: var(--text-main);
-            font-weight: 600;
-        }
-
-        /* Diretrizes */
-        .diretriz-item {
-            padding: 10px 0;
-            border-bottom: 1px dashed var(--border);
-        }
-        .diretriz-item:last-child { border: none; }
+        .diretriz-item { padding: 12px 0; border-bottom: 1px dashed var(--border); }
         .diretriz-title { font-weight: bold; color: var(--primary); }
-
-        /* Notificações */
+        
         .toast {
-            background: var(--success);
-            color: white;
-            padding: 12px 24px;
-            border-radius: 8px;
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-            display: none;
-            z-index: 1000;
-            font-weight: bold;
+            background: var(--success); color: white; padding: 14px 28px; border-radius: 8px;
+            position: fixed; bottom: 30px; right: 30px; box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            display: none; z-index: 1000; font-weight: bold;
         }
 
-        footer {
-            text-align: center;
-            padding: 30px;
-            color: var(--text-muted);
-            border-top: 1px solid var(--border);
-            margin-top: 60px;
-            font-size: 0.9rem;
-        }
+        footer { text-align: center; padding: 40px; color: var(--text-muted); border-top: 1px solid var(--border); margin-top: 60px; }
     </style>
 </head>
 <body>
 
 <header>
     <h1>Plataforma Integrada de Cidadania Digital</h1>
-    <p>Conscientização, Ética e Práticas de Segurança em Redes Sociais</p>
-    <div class="badge-ano">Ciclo Letivo Nacional • 2026</div>
+    <p>Segurança da Informação, LGPD e Governança de Dados Éticos</p>
 </header>
 
 <div class="container">
-
     <!-- FORMULÁRIO DE CADASTRO -->
     <div class="card col-6">
-        <h2>👤 Registro de Usuário Consciente</h2>
+        <h2>👤 Registro de Usuário Regulamentado</h2>
         <form id="cadastro-form">
             <div class="form-group">
                 <label for="nome">Nome Completo</label>
-                <input type="text" id="nome" required placeholder="Ex: Maria Silva">
+                <input type="text" id="nome" required placeholder="Ex: Gabriel Medeiros">
             </div>
             <div class="form-group">
-                <label for="email">E-mail de Contato</label>
-                <input type="email" id="email" required placeholder="exemplo@escola.com">
+                <label for="email">E-mail Corporativo/Estudantil</label>
+                <input type="email" id="email" required placeholder="nome@instituicao.com">
             </div>
             <div class="form-group">
-                <label for="perfil">Perfil na Rede</label>
+                <label for="perfil">Perfil de Acesso</label>
                 <select id="perfil" required>
                     <option value="">Selecione...</option>
                     <option value="Estudante">Estudante</option>
-                    <option value="Educador">Educador / Professor</option>
-                    <option value="Responsável">Pai / Responsável</option>
+                    <option value="Educador">Educador</option>
+                    <option value="Administrador">Administrador de TI</option>
                 </select>
             </div>
-            <button type="submit">Salvar Registro Local</button>
+            <button type="submit">Cadastrar no Servidor Java</button>
         </form>
+        <button class="btn-pdf" onclick="exportarDadosParaPDF()">📄 Baixar Relatório Técnico em PDF</button>
     </div>
 
-    <!-- CANAL DE DENÚNCIAS FICTÍCIAS -->
+    <!-- SIMULADOR DE DENÚNCIAS -->
     <div class="card col-6">
-        <h2>🛡️ Simulador de Denúncias Seguras</h2>
+        <h2>🛡️ Auditoria de Incidentes Virtuais</h2>
         <form id="denuncia-form">
             <div class="form-group">
-                <label for="tipo">Incidente Observado</label>
+                <label for="tipo">Tipo de Infração</label>
                 <select id="tipo" required>
-                    <option value="">Selecione a categoria...</option>
-                    <option value="Cyberbullying">Cyberbullying (Ofensas continuadas)</option>
-                    <option value="Fake News">Fake News (Desinformação prejudicial)</option>
-                    <option value="Phishing">Perfil Falso / Roubo de Dados</option>
+                    <option value="">Selecione...</option>
+                    <option value="Cyberbullying">Cyberbullying / Difamação</option>
+                    <option value="Vazamento">Vazamento de Dados Pessoais</option>
+                    <option value="Fake News">Campanha de Desinformação</option>
                 </select>
             </div>
             <div class="form-group">
-                <label for="descricao">Relato Detalhado</label>
-                <textarea id="descricao" rows="2" required placeholder="Insira o texto descritivo do teste..."></textarea>
+                <label for="descricao">Descrição Técnica</label>
+                <textarea id="descricao" rows="2" required placeholder="Descreva os fatos e links para análise pericial..."></textarea>
             </div>
             <div class="form-group">
-                <label>Captura de Tela / Evidência (Opcional)</label>
+                <label>Evidência Digital (Print/Logs)</label>
                 <input type="file" id="evidencia" accept="image/*" onchange="gerarPreview(event)">
-                <img id="preview-imagem" alt="Evidência selecionada">
+                <img id="preview-imagem" alt="Evidência">
             </div>
-            <button type="submit" class="btn-danger">Registrar Ocorrência Pedagógica</button>
+            <button type="submit" class="btn-danger">Registrar Alerta no Sistema</button>
         </form>
     </div>
 
-    <!-- QUIZ INTERATIVO MANTIDO E OTIMIZADO -->
+    <!-- QUIZ COM CRONÔMETRO -->
     <div class="card col-8">
-        <h2>🧠 Desafio Prático de Conduta Online</h2>
+        <h2>🧠 Simulador de Resposta a Incidentes (Quiz)</h2>
         <div id="quiz-box">
-            <p id="quiz-pergunta" style="font-weight: 600; font-size: 1.1rem;"></p>
+            <div class="timer-container">
+                <span>Tempo Restante: <span id="tempo-regressivo">15</span>s</span>
+                <div class="timer-bar-wrapper">
+                    <div id="barra-progresso" class="timer-bar"></div>
+                </div>
+            </div>
+            <p id="quiz-pergunta" style="font-weight: 700; font-size: 1.15rem;"></p>
             <div class="options" id="quiz-opcoes"></div>
         </div>
-        <div id="quiz-resultado" style="display:none; text-align: center; padding: 20px;"></div>
+        <div id="quiz-resultado" style="display:none; text-align: center;"></div>
     </div>
 
-    <!-- PAINEL DE DIRETRIZES RÁPIDAS -->
+    <!-- DIRETRIZES TÉCNICAS -->
     <div class="card col-4">
-        <h2>📚 Pilares da Lei Geral de Proteção</h2>
+        <h2>📚 Políticas de Conformidade</h2>
         <div class="diretriz-item">
+            <span class="diretriz-title">Autenticação MFA:</span> O uso de duplo fator é obrigatório em todas as contas institucionais.
+        </div>
+        <div class="diretriz-item">
+            <span class="diretriz-title">Pegada Cibernética:</span> Logs de auditoria registram acessos para fins de conformidade legal.
+        </div>
+        <div class="diretriz-item">
+            <span class="diretriz-title">Engenharia Social:</span> Desconfie de solicitações urgentes de dados por canais não oficiais.
+        </div>
+    </div>
+
+    <!-- MONITOR DE DADOS EM TEMPO REAL -->
+    <div class="card col-12">
